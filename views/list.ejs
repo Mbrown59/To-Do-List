@@ -1,0 +1,45 @@
+<%- include("header.ejs") %>
+
+
+
+
+    <div id="list">
+        <div id="titleHeader">
+            <h1 id="listTitle">
+                <%= listOption %>
+            </h1>
+            <p id="date"><%= date %></p>
+        </div>
+        <div id="items">
+
+
+
+
+            <div>
+                <form class="" action="/" method="post">
+                    <input class="" type="text" name="task" placeholder="Enter your task here" required
+                        autocomplete="off" />
+                    <button class="" type="submit" name="button" value="<%= listOption %>">+</button>
+                </form>
+            </div>
+
+
+            <% if(locals.listItems){ %>
+                <% for(var i=0; i < listItems.length; i++){ %>
+                    <div class="item">
+                        <input type="checkbox" />
+                        <p id="listItem">
+                            <%=listItems[i]%>
+                        </p>
+                    </div>
+                    <% }} %>
+
+        </div>
+    </div>
+<div id="navigation">
+    <button class="nav"><a href="/">Work List</a></button>
+    <button class="nav"><a href="/personal">Personal List</a></button>
+</div>
+    </body>
+
+    </html>
