@@ -101,7 +101,7 @@ button:hover {
   color: white;
 }
 
-form {
+#add {
   text-align: center;
   margin-left: 20px;
 }
@@ -162,11 +162,16 @@ input:checked + p {
   padding: 0;
 }
 
+#delete
+{
+  width: 70%;
+}
+
 .item {
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 70%;
+  width: 100%;
 }
 
 input[type="checkbox"] {

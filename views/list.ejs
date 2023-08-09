@@ -6,7 +6,8 @@
     <div id="list">
         <div id="titleHeader">
             <h1 id="listTitle">
-                <%= listOption %>
+                
+                <%= listOption.charAt(0).toUpperCase() + listOption.slice(1);%>
             </h1>
             <p id="date"><%= date %></p>
         </div>
@@ -16,29 +17,56 @@
 
 
             <div>
-                <form class="" action="/" method="post">
+                <form id="add" action="/" method="post">
                     <input class="" type="text" name="task" placeholder="Enter your task here" required
                         autocomplete="off" />
-                    <button class="" type="submit" name="button" value="<%= listOption %>">+</button>
-                </form>
+                        <% if(listOption.toLowerCase() == "work list"){ %>
+                        <button class="" type="submit" name="list" value="/">+</button>
+                        <% }else{ %>
+                        <button class="" type="submit" name="list" value="<%= listOption %>">+</button>
+
+                            <% } %>
+                    </form>
             </div>
 
 
             <% if(locals.listItems){ %>
-                <% for(var i=0; i < listItems.length; i++){ %>
-                    <div class="item">
-                        <input type="checkbox" />
+                    <% listItems.forEach(function(listItem){ %>
+                    <form id="delete" action="/delete" method="post">
+                        <div class="item">
+                        <input type="checkbox" onChange="this.form.submit()" name="checkbox" value="<%= listItem._id%>"/>
                         <p id="listItem">
-                            <%=listItems[i]%>
+                            <%=listItem.name%>
                         </p>
+                        <input type="hidden" name="listName" value="<%= listOption%>" ></input>
                     </div>
-                    <% }} %>
+                </form>
+                    <% }) %>
+                    <% } %>
 
         </div>
     </div>
+
+    <div>
+        <form id="add" action="/newList" method="post">
+            <input class="" type="text" name="newListName" placeholder="Add New List Name Here" required
+                autocomplete="off" />
+            <button class="" type="submit" name="button">+</button>
+        </form>
+    </div>
+
 <div id="navigation">
-    <button class="nav"><a href="/">Work List</a></button>
-    <button class="nav"><a href="/personal">Personal List</a></button>
+    <% if(locals.listButton){ %>
+        <% listButton.forEach(function(button){ %>
+           <% if(button.name == "Work"){ %>
+           <button class="nav"><a href="/"><%= button.name.charAt(0).toUpperCase() + button.name.slice(1); %> List</a></button>
+           <% }else{ %>
+
+        <button class="nav"><a href="/<%= button.name %>"><%= button.name.charAt(0).toUpperCase() + button.name.slice(1); %> List</a></button>
+        <% } %>
+        <% }) %>
+        <% } %>
+
 </div>
     </body>
 
